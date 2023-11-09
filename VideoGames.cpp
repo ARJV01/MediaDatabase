@@ -4,9 +4,8 @@
 
 using namespace std;
 
-VideoGames::VideoGames(char* titleMedia, int yearMedia, int ratingVideoGames, char* publisherVideoGames) :Media(titleMedia, yearMedia) {
-titleMedia = new char[80];
-  strcpy(titleMedia, titleMedia);
+VideoGames::VideoGames(char* titleMedia, int yearMedia, int ratingVideoGames, char* publisherVideoGames) :Media(titleMedia, yearMedia) {//contrucor for videogames
+  strcpy(title, titleMedia);
   yearMedia = yearMedia;
   publisher = new char[80];
   strcpy(publisher, publisherVideoGames);
@@ -14,19 +13,21 @@ titleMedia = new char[80];
 
 }
 
-char* VideoGames :: getPublisher() {
+char* VideoGames :: getPublisher() {//this funtion will return publisher
   return publisher;
 }
 
-int VideoGames :: getRating() {
+int VideoGames :: getRating() {//this funtion will return rating
   return rating;
 }
 
-void VideoGames :: print() {
+void VideoGames :: print() {// this funtion will print the feilds in videogames
   cout << "title: " << title << endl;
   cout << "year : " << year << endl;
   cout << "publisher: " << publisher << endl;
   cout << "rating : " << rating << endl;
 }
 
+VideoGames::~VideoGames() {//destructor
 
+}

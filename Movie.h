@@ -9,11 +9,12 @@ using namespace std;
 
 class Movie : public Media{
 public:
-  Movie(char* titleMedia, int yearMedia, char* directorMovie, int ratingMovie, int durationMovie);
-  char* getDirector();
-  int getDuration();
-  int getRating();
-  void print();
+  Movie(char* titleMedia, int yearMedia, char* directorMovie, int ratingMovie, int durationMovie);//Contructor for movie class
+  char* getDirector();//getter for director
+  int getDuration();//getter for duration
+  int getRating();//getter for rating 
+  void print();// will print out the data
+  ~Movie();//destructor
   protected:
   char* director;
   int duration;

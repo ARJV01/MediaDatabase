@@ -1,3 +1,7 @@
+//Arjun Vinsel
+//11/9/2023
+//This is a database of media types. This program will have users add search for and dlete media
+
 #include<iostream>
 #include<cstring>
 #include<vector>
@@ -8,9 +12,9 @@
 
 using namespace std;
 
-void addMedia(vector<Media*> &MediaLs);
-void searchMedia(vector<Media*> &MediaLs);
-void deleteMedia(vector<Media*> &MediaLs);
+void addMedia(vector<Media*> &MediaLs); // prototype for add funtion
+void searchMedia(vector<Media*> &MediaLs); // prototype for search funtion
+void deleteMedia(vector<Media*> &MediaLs);// prototype for delete funtion
 
 int main() {
   char input[80];
@@ -40,7 +44,7 @@ int main() {
   return 0;
 }
 
-void addMedia(vector<Media*> &MediaLs) {
+void addMedia(vector<Media*> &MediaLs) {// This furion will have the user input the type of media they wish to add and then it will add the new media to the vector
   char mediaType[80];
   cout << "What media do you wish to add (movie, music, videogames)" << endl;
   cin.getline(mediaType, 80);
@@ -70,7 +74,11 @@ void addMedia(vector<Media*> &MediaLs) {
       cin.ignore(256, '\n');
       Movie* mov = new Movie(title, year, director, rating, duration);
       MediaLs.push_back(mov);
+      if (title == mov -> getTitle()) {
+      cout << mov -> getTitle() << endl;
+
     }
+  }
   else if(strcmp(mediaType, "music") == 0) {
     char* title;
     char* publisher;
@@ -124,38 +132,82 @@ void addMedia(vector<Media*> &MediaLs) {
 
 }
 
-void searchMedia(vector<Media*> &MediaLs) {
+void searchMedia(vector<Media*> &MediaLs) { // This funtion will have the user enter a year or title and will print out the media it finds
   vector<Media*> :: iterator itr;
   char* input;
   input = new char[80];
-  cout << "enter a year or title" << endl;
+  cout << "enter if you wish to search by year or title" << endl;
   cin.getline(input, 80);
+  if(strcmp(input, "title") == 0) {
+    char* title;
+    title = new char[80];
+    cout << "please enter a title" << endl;
+    cin.getline(title,80);
   for(itr = MediaLs.begin(); itr < MediaLs.end(); itr++) {
-    if (input == ((*itr) -> getTitle()) || ((int)(*input) == ((*itr) -> getYear())))
-      {
+    if (strcmp(title, (*itr) -> getTitle()) == 0) {
       (*itr) -> print();
     }
   }
-
-}
-
-void deleteMedia(vector<Media*> &MediaLs) {
-vector<Media*> :: iterator itr;
- char confirm[80];
-  char* input;
-  input = new char[80];
-  cout << "enter a year or title" << endl;
-  cin.getline(input, 80);
-  for(itr = MediaLs.begin(); itr < MediaLs.end(); itr++) {
-    if ((input == ((*itr) -> getTitle()) || ((int)(*input) == ((*itr) -> getYear()))) {
-      (*itr) -> print();
-      cout << "Enter yes to confirm delete" << endl;
-      if(strcmp(confirm, "yes")) {
-	delete *itr;
-	MediaLs.erase(itr);
+  }
+  else if(strcmp(input, "year") ==0) {
+    int year =0;
+    cout << "please enter a year" << endl;
+    cin >> year;
+    for(itr = MediaLs.begin(); itr < MediaLs.end(); itr++) {
+      if (year == (*itr) -> getYear()) {
+	(*itr) -> print();
       }
     }
+
   }
+
 }
-  
+
+void deleteMedia(vector<Media*> &MediaLs) {// this funtion will have the user search for a media and delete it
+  vector<Media*> :: iterator itr;
+  char confirm[80];
+  char* input;
+  input = new char[80];
+  cout << "enter if you wish to search by year or title" << endl;
+  cin.getline(input, 80);
+  if(strcmp(input, "title") == 0) {
+    char* title;
+    title = new char[80];
+    cout << "please enter a title" << endl;
+    cin.getline(title,80);
+    cin.ignore(256, '\n');
+  for(itr = MediaLs.begin(); itr < MediaLs.end(); itr++) {
+    if (strcmp(title, (*itr) -> getTitle()) == 0) {
+      (*itr) -> print();
+      cout <<"enter yes to confirm delete" << endl;
+      cin.getline(confirm,80);
+      if(strcmp(confirm, "yes") == 0) {
+        delete *itr;
+        MediaLs.erase(itr);
+      }
+
+    }
+  }
+  }
+  else if(strcmp(input, "year") ==0) {
+    int year =0;
+    cout << "please enter a year" << endl;
+    cin >> year;
+    cin.ignore(256, '\n');
+    for(itr = MediaLs.begin(); itr < MediaLs.end(); itr++) {
+      if (year == (*itr) -> getYear()) {
+        (*itr) -> print();
+	cout << "Enter yes to confirm delete" << endl;
+       cin.getline(confirm,80);
+      if(strcmp(confirm, "yes") == 0) {
+        delete *itr;
+        MediaLs.erase(itr);
+      }
+    }
+
+  }
+
+}
+
+}
 

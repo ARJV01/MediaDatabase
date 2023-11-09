@@ -7,11 +7,12 @@ using namespace std;
 
 class Media {
 public:
-  Media();
-  Media(char* titleMedia, int yearMedia);
-  char* getTitle();
-  int getYear();
-  virtual void print();
+  Media();//Default contructor for media
+  Media(char* titleMedia, int yearMedia);//contrucotor for media
+  char* getTitle();//Getter for title
+  int getYear();//getter for year
+  virtual void print();//will print the information
+  virtual ~ Media();//destructor
 protected:
   char* title;
   int year;
