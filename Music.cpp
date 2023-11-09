@@ -28,10 +28,9 @@ char* Music :: getPublisher() {
   return publisher;
 }
 
-void Movie :: print() {
+void Music :: print() {
   cout << "title: " << title << endl;
   cout << "artist : " << artist << endl;
-  cout << "director: " << director << endl;
   cout << "year : " << year << endl;
   cout << "duration: " << duration << endl;
 }

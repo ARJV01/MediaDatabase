@@ -11,7 +11,7 @@ public:
   Media(char* titleMedia, int yearMedia);
   char* getTitle();
   int getYear();
-  void print();
+  virtual void print();
 protected:
   char* title;
   int year;

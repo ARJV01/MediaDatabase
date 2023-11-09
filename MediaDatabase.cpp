@@ -17,7 +17,7 @@ int main() {
   bool stillRunning = true;
   vector<Media*> MediaLs;
   while(stillRunning == true) {
-  cout << "Enter add search or delete:" << endl;
+  cout << "Enter add search delete or quit:" << endl;
   cin >> input;
   cin.ignore(256, '\n');
   if(strcmp(input , "add")==0) {
@@ -25,6 +25,9 @@ int main() {
   }
   else if(strcmp(input, "search") == 0) {
     searchMedia(MediaLs);
+  }
+  else if (strcmp(input, "delete") == 0) {
+    deleteMedia(MediaLs);
   }
   else if(strcmp(input, "quit") == 0) {
     stillRunning = false;
@@ -123,19 +126,36 @@ void addMedia(vector<Media*> &MediaLs) {
 
 void searchMedia(vector<Media*> &MediaLs) {
   vector<Media*> :: iterator itr;
-  char input[80];
+  char* input;
+  input = new char[80];
   cout << "enter a year or title" << endl;
   cin.getline(input, 80);
   for(itr = MediaLs.begin(); itr < MediaLs.end(); itr++) {
-    if (input == ((*itr) -> getYear()) || (int)(input) == ((*itr) -> getTitle()) {
-	print(*itr);
+    if (input == ((*itr) -> getTitle()) || ((int)(*input) == ((*itr) -> getYear())))
+      {
+      (*itr) -> print();
     }
   }
 
 }
 
 void deleteMedia(vector<Media*> &MediaLs) {
-
+vector<Media*> :: iterator itr;
+ char confirm[80];
+  char* input;
+  input = new char[80];
+  cout << "enter a year or title" << endl;
+  cin.getline(input, 80);
+  for(itr = MediaLs.begin(); itr < MediaLs.end(); itr++) {
+    if ((input == ((*itr) -> getTitle()) || ((int)(*input) == ((*itr) -> getYear()))) {
+      (*itr) -> print();
+      cout << "Enter yes to confirm delete" << endl;
+      if(strcmp(confirm, "yes")) {
+	delete *itr;
+	MediaLs.erase(itr);
+      }
+    }
+  }
 }
   
 
